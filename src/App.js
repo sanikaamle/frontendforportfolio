@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import './App.css';
 import ProfileCard from './ProfileCard';
 import MagnetLines from './MagnetLines';
