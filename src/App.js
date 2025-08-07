@@ -117,11 +117,19 @@ function App() {
     e.preventDefault();
     try {
       const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-      await fetch(`${apiUrl}/api/contact`, {
+      console.log('Submitting to:', apiUrl);
+      
+      const response = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(contactForm),
       });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Server error');
+      }
+      
       setContactSubmitted(true);
       setTimeout(() => {
         setIsContactModalOpen(false);
@@ -129,7 +137,8 @@ function App() {
         setContactForm({ name: '', email: '' });
       }, 1500);
     } catch (err) {
-      alert('Failed to submit. Please try again.');
+      console.error('Contact form error:', err);
+      alert(`Failed to submit: ${err.message}. Please check your connection and try again.`);
     }
   };
 
@@ -139,16 +148,23 @@ function App() {
     e.preventDefault();
     try {
       const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-      await fetch(`${apiUrl}/api/suggestion`, {
+      const response = await fetch(`${apiUrl}/api/suggestion`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ suggestion }),
       });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Server error');
+      }
+      
       setSuggestionSubmitted(true);
       setSuggestion('');
       setTimeout(() => setSuggestionSubmitted(false), 1500);
     } catch (err) {
-      alert('Failed to submit suggestion.');
+      console.error('Suggestion error:', err);
+      alert(`Failed to submit suggestion: ${err.message}`);
     }
   };
 
@@ -161,16 +177,23 @@ function App() {
     e.preventDefault();
     try {
       const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-      await fetch(`${apiUrl}/api/visitor`, {
+      const response = await fetch(`${apiUrl}/api/visitor`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(visitorForm),
       });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Server error');
+      }
+      
       setVisitorSubmitted(true);
       setVisitorForm({ name: '', linkedin: '', feedback: '' });
       setTimeout(() => setVisitorSubmitted(false), 1500);
     } catch (err) {
-      alert('Failed to submit.');
+      console.error('Visitor form error:', err);
+      alert(`Failed to submit: ${err.message}`);
     }
   };
 
