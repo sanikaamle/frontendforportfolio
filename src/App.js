@@ -161,21 +161,14 @@ const handleSuggestionSubmit = async (e) => {
       throw new Error(errorData.error || 'Server error');
     }
 
-    
-    console.log("Suggestion submitted successfully");
+    setSuggestionSubmitted(true);
+    setSuggestion('');
+    setTimeout(() => setSuggestionSubmitted(false), 1500);
   } catch (err) {
-    console.error("Error submitting suggestion:", err);
+    console.error('Suggestion error:', err);
+    alert(`Failed to submit suggestion: ${err.message}`);
   }
-};  
-
-      setSuggestionSubmitted(true);
-      setSuggestion('');
-      setTimeout(() => setSuggestionSubmitted(false), 1500);
-    } catch (err) {
-      console.error('Suggestion error:', err);
-      alert(`Failed to submit suggestion: ${err.message}`);
-    }
-  };
+};
 
   const handleVisitorBoxClick = () => setIsVisitorModalOpen(true);
   const handleVisitorFormChange = (e) => {
