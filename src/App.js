@@ -143,22 +143,31 @@ function App() {
   };
 
   const handleReadsBoxClick = () => setIsReadsModalOpen(true);
-  const handleSuggestionChange = (e) => setSuggestion(e.target.value);
-  const handleSuggestionSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-      const response = await fetch(`${apiUrl}/api/suggestion`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ suggestion })
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Server error');
-      }
-      
+
+const handleSuggestionChange = (e) => setSuggestion(e.target.value);
+
+const handleSuggestionSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    const response = await fetch(`${apiUrl}/api/suggestion`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ suggestion })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Server error');
+    }
+
+    
+    console.log("Suggestion submitted successfully");
+  } catch (err) {
+    console.error("Error submitting suggestion:", err);
+  }
+};  
+
       setSuggestionSubmitted(true);
       setSuggestion('');
       setTimeout(() => setSuggestionSubmitted(false), 1500);
