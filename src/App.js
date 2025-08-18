@@ -147,11 +147,11 @@ function App() {
   const handleSuggestionSubmit = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      Url = process.env.REACT_APP_API_URL || 'http://localhost:5000';
       const response = await fetch(`${apiUrl}/api/suggestion`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ suggestion }),
+        bodyconst api: JSON.stringify({ suggestion }),
       });
       
       if (!response.ok) {
