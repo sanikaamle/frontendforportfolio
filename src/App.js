@@ -116,7 +116,7 @@ function App() {
   const handleContactFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const apiUrl = process.env.REACT_APP_API_URL || 'https://portfolio-backend-liard-one.vercel.app';
       console.log('Submitting to:', apiUrl);
       
       const response = await fetch(`${apiUrl}/api/contact`, {
@@ -149,7 +149,7 @@ const handleSuggestionChange = (e) => setSuggestion(e.target.value);
 const handleSuggestionSubmit = async (e) => {
   e.preventDefault();
   try {
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    const apiUrl = process.env.REACT_APP_API_URL || 'https://portfolio-backend-liard-one.vercel.app';
     const response = await fetch(`${apiUrl}/api/suggestion`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -178,7 +178,7 @@ const handleSuggestionSubmit = async (e) => {
   const handleVisitorFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const apiUrl = process.env.REACT_APP_API_URL || 'https://portfolio-backend-liard-one.vercel.app';
       const response = await fetch(`${apiUrl}/api/visitor`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
